@@ -38,7 +38,7 @@ def dut(
     try:
         # check if test should be executed, if not than do not flash/run code on device
         if setup_manager.is_executable:
-            device.connect()
+            #device.connect()
             device.generate_command(build_dir)
             device.flash_and_run(timeout=spec.timeout)
             device.connect()

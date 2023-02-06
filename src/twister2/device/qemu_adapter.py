@@ -35,7 +35,8 @@ class QemuAdapter(DeviceAbstract):
         self._exc: Exception | None = None  #: store any exception which appeared running this thread
         self._thread: threading.Thread | None = None
         self._emulation_was_finished: bool = False
-        self.connection = FifoHandler(Path(build_dir).joinpath(QEMU_FIFO_FILE_NAME))
+        fifo = str(Path(build_dir).joinpath(QEMU_FIFO_FILE_NAME))
+        self.connection = FifoHandler(fifo + '.in', fifo + '.out')
         self.command: list[str] = []
         self.timeout: float = 60  # running timeout in seconds
         self.booting_timeout_in_ms: int = 10_000  #: wait time for booting Qemu in milliseconds
